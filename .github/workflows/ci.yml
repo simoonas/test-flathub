@@ -15,7 +15,7 @@ jobs:
       - name: Retrieve tag from manifest
         id: manifestTagVersion
         run: |
-          echo "TAG_VERSION=$(jq '.modules[0].sources[0].tag' io.github.simoonas.marca.json)" >> $GITHUB_OUTPUT
+          echo "TAG_VERSION=$(jq -r '.modules[0].sources[0].tag' io.github.simoonas.marca.json)" >> $GITHUB_OUTPUT
 
       - uses: actions/checkout@v4
         with:
