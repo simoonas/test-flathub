@@ -35,6 +35,12 @@ jobs:
             curl -O https://raw.githubusercontent.com/flatpak/flatpak-builder-tools/master/cargo/flatpak-cargo-generator.py
             python3 flatpak-cargo-generator.py clone/io.github.simoonas.marca/Cargo.lock -o cargo-sources.json
           fi
+
+      - name: Debug git state
+        run: |
+          git branch -vv
+          git status
+          git remote -v
       # Detect modified files, commit them, open PR
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
