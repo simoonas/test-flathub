@@ -28,6 +28,11 @@ jobs:
         with:
           args: --update --never-fork io.github.simoonas.marca.json
 
+      - name: Debug
+        run: |
+          git log --oneline --decorate -5
+          git branch -avv
+
       # If update happened, checker leaves behind the upstream in clone/
       - name: Regenerate Cargo Sources
         run: |
