@@ -40,6 +40,7 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           base: master
+          signoff: false
           branch: pr/update-manifest
           commit-message: "Update version and cargo-sources.json"
           title: "Update upstream release"
