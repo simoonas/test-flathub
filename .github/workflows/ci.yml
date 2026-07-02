@@ -5,7 +5,7 @@ on: [pull_request]
 jobs:
   update-sources:
     runs-on: ubuntu-latest
-    if: github.actor == 'flathubbot'
+    #if: github.actor == 'flathubbot'
     steps:
       - uses: actions/checkout@v4
         with:
