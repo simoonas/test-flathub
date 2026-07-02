@@ -1,0 +1,53 @@
+{
+    "id": "io.github.simoonas.marca",
+    "runtime": "org.gnome.Platform",
+    "runtime-version": "50",
+    "sdk": "org.gnome.Sdk",
+    "sdk-extensions": [
+        "org.freedesktop.Sdk.Extension.rust-stable"
+    ],
+    "command": "marca",
+    "finish-args": [
+        "--socket=fallback-x11",
+        "--share=ipc",
+        "--socket=wayland",
+        "--device=dri",
+        "--share=network"
+    ],
+    "modules" : [
+        {
+            "name" : "marca",
+            "buildsystem" : "simple",
+            "build-options" : {
+                "append-path" : "/usr/lib/sdk/rust-stable/bin",
+                "env" : {
+                    "CARGO_HOME": "/run/build/marca/cargo"
+                }
+            },
+            "build-commands": [
+                "cargo build --offline --release --all-features",
+                "install -Dm0755 target/release/marca ${FLATPAK_DEST}/bin/marca",
+                "install -Dm0644 LICENSE ${FLATPAK_DEST}/share/licenses/io.github.simoonas.marca/LICENSE",
+                "install -Dm0644 data/io.github.simoonas.marca.svg ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg",
+                "install -Dm0644 data/io.github.simoonas.marca-symbolic.svg ${FLATPAK_DEST}/share/icons/hicolor/symbolic/apps/${FLATPAK_ID}-symbolic.svg",
+                "install -Dm0644 data/io.github.simoonas.marca.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop",
+                "install -Dm644 data/io.github.simoonas.marca.gschema.xml -t ${FLATPAK_DEST}/share/glib-2.0/schemas/",
+                "glib-compile-schemas ${FLATPAK_DEST}/share/glib-2.0/schemas/",
+                "install -Dm0644 data/io.github.simoonas.marca.metainfo.xml ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml"
+            ],
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://github.com/simoonas/Marca.git",
+                    "tag": "v0.1.0",
+                    "commit": "83cd8d0dd5f036d27638deab2f073762ea23b8c8",
+                    "x-checker-data": {
+                      "type": "git",
+                      "tag-pattern": "^v([\\d.]+)$"
+                  }
+                },
+                "cargo-sources.json"
+            ]
+        }
+    ]
+}
