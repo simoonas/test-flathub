@@ -26,7 +26,8 @@ jobs:
       - name: Update cargo-sources.json
         run: |
           sudo apt-get update -y && sudo apt-get install -y python3-aiohttp python3-tomlkit
-          python3 flatpak-builder-tools/cargo/flatpak-cargo-generator.py tsukimi/Cargo.lock -o cargo-sources.json 
+          curl -O https://raw.githubusercontent.com/flatpak/flatpak-builder-tools/master/cargo/flatpak-cargo-generator.py
+          python3 flatpak-cargo-generator.py marca/Cargo.lock -o cargo-sources.json 
           rm -rf marca
           [[ ! $(git status --porcelain) ]] && exit 0
           git config user.name "${{ github.actor }}"
